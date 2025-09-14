@@ -1,0 +1,65 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Footer.css';
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-section">
+          <div className="footer-logo">
+            <i className="fas fa-trophy"></i>
+            <span>SAI Talent Platform</span>
+          </div>
+          <p className="footer-description">
+            Empowering athletes through innovative talent assessment
+          </p>
+        </div>
+
+        <div className="footer-section">
+          <h4 className="footer-title">Quick Links</h4>
+          <ul className="footer-links">
+            <li><Link to="/" className="footer-link">Home</Link></li>
+            <li><Link to="/sports-category" className="footer-link">Sports</Link></li>
+            <li><Link to="/about" className="footer-link">About</Link></li>
+            <li><Link to="/contact" className="footer-link">Contact</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h4 className="footer-title">Connect</h4>
+          <div className="social-links">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <i className="fab fa-instagram"></i>
+            </a>
+          </div>
+          <div className="contact-email">
+            <i className="fas fa-envelope"></i>
+            <a href="mailto:support@saitalent.in">support@saitalent.in</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="footer-legal">
+          <span>© {currentYear} SAI Talent Platform. All rights reserved.</span>
+          <div className="legal-links">
+            <Link to="/privacy" className="legal-link">Privacy Policy</Link>
+            <span>|</span>
+            <Link to="/terms" className="legal-link">Terms of Service</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

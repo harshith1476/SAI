@@ -1,0 +1,330 @@
+.posture-detection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  color: white;
+  min-height: 100vh;
+}
+
+.video-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.input-video {
+  display: none;
+}
+
+.output-canvas {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.posture-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.current-posture h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.accuracy-meter {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.accuracy-bar {
+  height: 100%;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #10B981, #34D399);
+  position: relative;
+}
+
+.accuracy-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.accuracy-text {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.feedback {
+  grid-column: 1 / -1;
+}
+
+.feedback p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.feedback-good {
+  background: linear-gradient(135deg, #10B981, #34D399);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.feedback-warning {
+  background: linear-gradient(135deg, #FF6B35, #FF8A65);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.record-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 160px;
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  color: white;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.record-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+}
+
+.record-btn.recording {
+  background: linear-gradient(135deg, #EF4444, #F87171);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.record-btn.recording:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Sport-specific styling */
+.posture-detection.athletics {
+  background: linear-gradient(135deg, #FF6B35, #FF8A65);
+}
+
+.posture-detection.swimming {
+  background: linear-gradient(135deg, #06B6D4, #0891B2);
+}
+
+.posture-detection.gymnastics {
+  background: linear-gradient(135deg, #EC4899, #F472B6);
+}
+
+.posture-detection.weightlifting {
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+}
+
+.posture-detection.boxing {
+  background: linear-gradient(135deg, #EF4444, #F87171);
+}
+
+.posture-detection.wrestling {
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+}
+
+.posture-detection.badminton {
+  background: linear-gradient(135deg, #10B981, #34D399);
+}
+
+.posture-detection.football {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .posture-detection {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .posture-info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .current-posture h3 {
+    font-size: 1.2rem;
+  }
+
+  .feedback p {
+    font-size: 1rem;
+  }
+
+  .record-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 140px;
+  }
+}
+
+/* Loading animation */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  color: white;
+  z-index: 1000;
+}
+
+.loading-overlay p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Error overlay */
+.error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(239, 68, 68, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  color: white;
+  z-index: 1000;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-overlay p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.error-overlay button {
+  padding: 10px 20px;
+  background: white;
+  color: #EF4444;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error-overlay button:hover {
+  background: #F3F4F6;
+  transform: translateY(-1px);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #FFFFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pose landmarks styling */
+.pose-landmarks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.landmark-point {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #FF0000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
+}
+
+.landmark-connection {
+  position: absolute;
+  background: #00FF00;
+  height: 2px;
+  transform-origin: left center;
+  box-shadow: 0 0 2px rgba(0, 255, 0, 0.6);
+}
